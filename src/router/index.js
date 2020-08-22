@@ -6,7 +6,7 @@ import Login from '@/views/Auth/Login'
 
 import Register from '@/views/Auth/Register'
 
-import Center from '@/views/Auth/Center'
+import Personal from '@/views/Personal/Index'
 
 Vue.use(VueRouter)
 
@@ -26,12 +26,11 @@ Vue.use(VueRouter)
     name:'Register',
     component:Register
   },
-  {
-    path:'/center',
-    name:'Center',
-    component:Center
-  }
- 
+   {
+     path:'/index',
+     name:'Index',
+     component:Personal
+   }
 ]
 
 const router = new VueRouter({
