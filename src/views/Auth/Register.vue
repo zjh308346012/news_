@@ -60,6 +60,9 @@ export default {
           this.password=n;
       },
       register(){
+          if(!this.username||this.nickname||this.password){
+              this.$toast.fail('请输入完整的信息')
+          }
          this.$axios({
              url:'http://127.0.0.1:3000/register',
              method:'post',
@@ -70,6 +73,12 @@ export default {
              }
          })
          .then(res=>{
+             
+             if(res.data.message=='注册成功'){
+                 this.$toast.success(res.data.message)
+             }else{
+                 this.$toast.fail(res.data.message)
+             }
              console.log(res);
          })
          .catch(err=>{
