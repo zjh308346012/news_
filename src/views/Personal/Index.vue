@@ -6,7 +6,7 @@
           <span class="picture">
               <img :src="'http://127.0.0.1:3000'+head_img" alt="">
           </span>
-          <i class="iconfont iconxingbienan"></i>
+          <i class="iconfont" :class="isTrue? 'iconxingbienan':'iconxingbienv'"></i>
           <span class="nameSelf">{{nickname}}</span>
           <span class="time">{{time}}</span>
           <i class="iconfont iconjiantou1"></i>
@@ -28,7 +28,8 @@ export default {
         return {
             time:'',
             head_img:'',
-            nickname:''
+            nickname:'',
+            isTrue:''
         }
     },
          components:{
@@ -60,7 +61,12 @@ export default {
           this.time=res.data.data.create_date;
 
           this.head_img=res.data.data.head_img;
-          console.log(this.time,this.head_img,this.nickname);
+          
+          if(res.data.data.gender==1){
+              this.isTrue=true
+          }else if(res.data.data.gender==0){
+              this.isTrue=false
+          }
            
            }
         })
@@ -97,7 +103,7 @@ export default {
                 width: 100%;
             }
         }
-        .iconxingbienan{
+        .iconfont{
             position: absolute;
             top: 50px;
             left: 120px;
