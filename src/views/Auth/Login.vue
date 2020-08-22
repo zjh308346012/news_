@@ -48,24 +48,36 @@ export default {
          this.password=data
       },
       login(){
+        //进行AJAX的请求
           this.$axios({
               url:'http://127.0.0.1:3000/login',
               method:'post',
+              //data是post请求方式的设置参数方法
               data:{
                   username:this.username,
                   password:this.password
               }
           })
           .then(res=>{
-              console.log(res.data.message);
+              console.log(res.data);
               
             if(res.data.message == '登录成功'){
-                
+               
+
+              
+                //登录成功之后.将token值以及userid进行存储,存储在本地localStorage
+
               localStorage.setItem('token',res.data.data.token);
+
               localStorage.setItem('userId',res.data.data.user.id)
+
               this.$toast.success(res.data.message)
-              setInterval(() => {
-                    this.$router.push({name:'Center'})
+               //登录成功之后进行弹窗提示登录成功
+           
+               setTimeout(() => {
+                  //设置定时器,用Timeout的方法,因为如果是设置成setInval的是定时器,它会无限触发
+                    this.$router.push({name:'Index'})
+
               }, 1000);
             }else{
                 this.$$toast.fail(res.data.message)
