@@ -3,10 +3,13 @@
       <div class="header"></div>
   <div class="info">
      <div class="personal">
-          <van-image  class="picture" round  :src="'http://127.0.0.1:3000'+head_img"/>
-          <i class="iconfont" :class="isTrue? 'iconxingbienan':'iconxingbienv'"></i>
-          <span class="nameSelf">{{nickname}}</span>
-          <span class="time">{{time}}</span>
+          <van-image  class="picture" round  :src="'http://127.0.0.1:3000'+userInfo.head_img"/>
+          <!-- <i class="iconfont" :class="isTrue? 'iconxingbienan':'iconxingbienv'"></i> -->
+          <i v-if="userInfo.gender==1" class="iconfont iconxingbienan"></i>
+           <i v-else class="iconfont iconxingbienv"></i>
+           <!-- 进行v-if判定 -->
+          <span class="nameSelf">{{userInfo.nickname}}</span>
+          <span v-if="userInfo.create_date" class="time">{{userInfo.create_date.split('T')[0]}}</span>
           <i class="iconfont iconjiantou1"></i>
       </div>
         </div>
@@ -26,16 +29,18 @@ import Authnew from '@/components/Authnew'
 export default {
     data() {
         return {
-            time:'',
-            head_img:'',
-            nickname:'',
-            isTrue:''
+            // time:'',
+            // head_img:'',
+            // nickname:'',
+            // isTrue:''
+
+            userInfo:{}
         }
     },
          components:{
              AuthPersonal,AuthBtn,Authnew
          },
-          mounted() {
+          created() {
          
         const id = localStorage.getItem('userId')
         this.$axios({
@@ -45,7 +50,7 @@ export default {
             headers: {
 
         Authorization: "Bearer " + localStorage.getItem('token')
-
+          //Bearer是标准化
     }
         })
       
@@ -54,19 +59,20 @@ export default {
            console.log(res);
            if(res.data.message=='获取成功'){
                console.log(123);
-              
-          console.log(res.data.data.nickname);
-          this.nickname= res.data.data.nickname
+        //   this.nickname= res.data.data.nickname
 
-          this.time=res.data.data.create_date;
+        //   this.time=res.data.data.create_date;
 
-          this.head_img=res.data.data.head_img;
+        //   this.head_img=res.data.data.head_img;
           
-          if(res.data.data.gender==1){
-              this.isTrue=true
-          }else if(res.data.data.gender==0){
-              this.isTrue=false
-          }
+        //   if(res.data.data.gender==1){
+        //       this.isTrue=true
+        //   }else if(res.data.data.gender==0){
+        //       this.isTrue=false
+        //   }
+
+        this.userInfo=res.data.data
+        console.log(this.userInfo);
            
            }
         })
@@ -110,12 +116,22 @@ export default {
                 width: 100%;
             }
         }
-        .iconfont{
-            position: absolute;
+        
+           
+        .iconxingbienan{
+             position: absolute;
             top: 50px;
             left: 120px;
             font-size: 18/360*100vw;
             color: #90c6ee;
+        }
+        .xingbienv{
+              position: absolute;
+            top: 50px;
+            left: 120px;
+            font-size: 18/360*100vw;
+            color: red;
+        
             
         }
         .nameSelf{
@@ -132,8 +148,10 @@ export default {
         }
         .iconjiantou1{
             position: absolute;
-            top:50px;
-            right: 10px;
+            width: 20/360*100vw;
+            height: 20/360*100vw;
+            top: 60/360*100vw;
+            left: 328/360*100vw;
             font-size: 20/360*100vw;
             color: #ccc;
         }
