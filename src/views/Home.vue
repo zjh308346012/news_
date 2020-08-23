@@ -16,22 +16,28 @@
        <button class="login" @click="login">登录</button>
       <button class="register" @click="register">注册</button>
     </div> 
-   
+       <AuthBtn btnText='个人中心' @clickedBtn='Index'/>
   </div>
  
 </template>
 
 <script>
 // @ is an alias to /src
- 
+ import AuthBtn from '@/components/AuthBtn'
 
 export default {
+  components:{
+    AuthBtn
+  },
   methods: {
     login(){
       this.$router.push({name:'Login'})
     },
     register(){
       this.$router.push({name:'Register'})
+    },
+    Index(){
+      this.$router.push({name:'Index'})
     }
   },
  
