@@ -3,26 +3,26 @@
       <div class="header"></div>
   <div class="info">
      <div class="personal">
-          <span class="picture">
-              <img :src="'http://127.0.0.1:3000'+head_img" alt="">
-          </span>
+          <van-image  class="picture" round  :src="'http://127.0.0.1:3000'+head_img"/>
           <i class="iconfont" :class="isTrue? 'iconxingbienan':'iconxingbienv'"></i>
           <span class="nameSelf">{{nickname}}</span>
           <span class="time">{{time}}</span>
           <i class="iconfont iconjiantou1"></i>
       </div>
         </div>
-        <AuthPersonal labelText='我的关注' descText='关注的用户'/>
-        <AuthPersonal labelText='我的跟帖' descText='跟帖/回复'/>
-        <AuthPersonal labelText='我的收藏' descText='文章/视频'/>
-        <AuthPersonal labelText='设置' />
-
+         <Authnew labelText='我的关注' descText='关注的用户'/>
+         <Authnew labelText='我的跟帖' descText='跟帖/回复'/>
+        <Authnew labelText='我的收藏' descText='文章/视频'/>
+        <Authnew labelText='设置' />
+        <AuthBtn btnText='退出登录' @clickedBtn='logout'/>
          </div>
 </template>
 
 <script>
-
+import AuthBtn from '@/components/AuthBtn'
 import AuthPersonal from '@/components/AuthPersonal'
+
+import Authnew from '@/components/Authnew'
 export default {
     data() {
         return {
@@ -33,7 +33,7 @@ export default {
         }
     },
          components:{
-             AuthPersonal
+             AuthPersonal,AuthBtn,Authnew
          },
           mounted() {
          
@@ -71,6 +71,15 @@ export default {
            }
         })
      
+    },
+    methods:{
+        logout(){
+            localStorage.removeItem('token');
+
+             localStorage.removeItem('userId');
+
+            this.$router.replace({name:'Home'})
+        }
     }
 }
 </script>
@@ -93,10 +102,8 @@ export default {
         position: relative;
         
         .picture{
-            display:inline-block;
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
+            width: 70/360*100vw;
+            height: 70/360*100vw;
             margin: 30px 30px;
             background-color: darkkhaki;
             img{
