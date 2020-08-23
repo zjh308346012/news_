@@ -62,8 +62,6 @@ export default {
               console.log(res.data);
               
             if(res.data.message == '登录成功'){
-               
-
               
                 //登录成功之后.将token值以及userid进行存储,存储在本地localStorage
 
