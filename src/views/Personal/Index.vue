@@ -1,7 +1,7 @@
 <template>
   <div class='centerWrapper'>
       <div class="header"></div>
-  <div class="info">
+  <div class="info"  @click="goEdit">
      <div class="personal">
           <van-image  class="picture" round  :src="'http://127.0.0.1:3000'+userInfo.head_img"/>
           <!-- <i class="iconfont" :class="isTrue? 'iconxingbienan':'iconxingbienv'"></i> -->
@@ -45,7 +45,7 @@ export default {
         const id = localStorage.getItem('userId')
         this.$axios({
         
-            url:'http://127.0.0.1:3000/user/'+id,
+            url:'/user/'+id,
             
             headers: {
 
@@ -55,10 +55,9 @@ export default {
         })
       
         .then((res)=>{
-            let that =this
-           console.log(res);
-           if(res.data.message=='获取成功'){
-               console.log(123);
+           
+          
+               
         //   this.nickname= res.data.data.nickname
 
         //   this.time=res.data.data.create_date;
@@ -72,9 +71,9 @@ export default {
         //   }
 
         this.userInfo=res.data.data
-        console.log(this.userInfo);
+        
            
-           }
+    
         })
      
     },
@@ -85,6 +84,10 @@ export default {
              localStorage.removeItem('userId');
 
             this.$router.replace({name:'Home'})
+        },
+       goEdit(){
+           
+            this.$router.push({name:'Edit'})
         }
     }
 }
