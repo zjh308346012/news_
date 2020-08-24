@@ -1,14 +1,14 @@
 <template>
       <div class="focus">
           <span class="label">{{labelText}}</span>
-          <span class="desc">{{descText}}</span>
+          <span class="desc" >{{descText}}</span>
         <i class="iconfont iconjiantou1"></i>
       </div>
 </template>
 
 <script>
 export default {
-  props:['labelText','descText'],
+  props:['labelText','descText','type'],
   mounted() {
     console.log(this.time);
   },
