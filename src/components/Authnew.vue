@@ -1,14 +1,20 @@
 <template>
-  <van-cell :title="labelText" is-link :value="descText" height='300px'/>
+  <van-cell :title="labelText" is-link :value="descText" @click="goEvent" />
 </template>
 
 <script>
 
 export default {
-   props:['labelText','descText']
+   props:['labelText','descText'],
+
+   methods:{
+     goEvent(){
+       this.$emit('clickedGo')
+     }
+   }
+
 }
 </script>
-
-<style>
+<style lang="less" scoped>
 
 </style>
