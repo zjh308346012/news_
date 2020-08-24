@@ -50,7 +50,7 @@ export default {
       login(){
         //进行AJAX的请求
           this.$axios({
-              url:'http://127.0.0.1:3000/login',
+              url:'/login',
               method:'post',
               //data是post请求方式的设置参数方法
               data:{
@@ -115,8 +115,5 @@ export default {
         }
     }
     
-     
-   
-  
 }
 </style>
