@@ -6,6 +6,7 @@
 
 <style lang="less">
 *{
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
