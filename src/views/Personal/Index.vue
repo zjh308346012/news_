@@ -13,9 +13,9 @@
           <i class="iconfont iconjiantou1"></i>
       </div>
         </div>
-         <Authnew labelText='我的关注' descText='关注的用户'/>
-         <Authnew labelText='我的跟帖' descText='跟帖/回复'/>
-        <Authnew labelText='我的收藏' descText='文章/视频'/>
+         <Authnew labelText='我的关注' descText='关注的用户' @clickedGo='addfollows'/>
+         <Authnew labelText='我的跟帖' descText='跟帖/回复'  @clickedGo='follow_up'/>
+        <Authnew labelText='我的收藏' descText='文章/视频'   @clickedGo='collect'/>
         <Authnew labelText='设置' />
         <AuthBtn btnText='退出登录' @clickedBtn='logout'/>
          </div>
@@ -55,25 +55,9 @@ export default {
         })
       
         .then((res)=>{
-           
-          
-               
-        //   this.nickname= res.data.data.nickname
-
-        //   this.time=res.data.data.create_date;
-
-        //   this.head_img=res.data.data.head_img;
-          
-        //   if(res.data.data.gender==1){
-        //       this.isTrue=true
-        //   }else if(res.data.data.gender==0){
-        //       this.isTrue=false
-        //   }
 
         this.userInfo=res.data.data
         
-           
-    
         })
      
     },
@@ -88,6 +72,15 @@ export default {
        goEdit(){
            
             this.$router.push({name:'Edit'})
+        },
+        addfollows(){
+            this.$router.push({name:'Focus'})
+        },
+        follow_up(){
+            this.$router.push({name:'Follow'})
+        },
+        collect(){
+            this.$router.push({name:'Collect'})
         }
     }
 }
@@ -128,7 +121,7 @@ export default {
             font-size: 18/360*100vw;
             color: #90c6ee;
         }
-        .xingbienv{
+        .iconxingbienv{
               position: absolute;
             top: 50px;
             left: 120px;
