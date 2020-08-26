@@ -4,7 +4,7 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-import Vant, { Toast } from 'vant'
+import Vant from 'vant'
 
 import 'vant/lib/index.css'
 
@@ -19,7 +19,7 @@ Vue.use(Vant)
 //路由守卫 to是要去那个页面,from是从那个页面而来 next是一个放行函数
 router.beforeEach((to, from, next) => {
   
-  const pageEdit=['Index','Edit']
+  const pageEdit=['Index','Edit','Focus','Follow','Collect','Addfans']
   const hasToken = localStorage.getItem('token');
     //在这里是否跳转到个人中心页面
     if(pageEdit.indexOf(to.name) != -1){
