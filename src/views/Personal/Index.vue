@@ -47,11 +47,11 @@ export default {
         
             url:'/user/'+id,
             
-            headers: {
+    //         headers: {
 
-        Authorization: "Bearer " + localStorage.getItem('token')
-          //Bearer是标准化
-    }
+    //     Authorization: "Bearer " + localStorage.getItem('token')
+    //       //Bearer是标准化
+    // }
         })
       
         .then((res)=>{
