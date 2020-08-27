@@ -2,7 +2,7 @@
   <div class="focusWrapper">
        <div class="header"></div>
       <AuthHead headText='我的关注' @goBackcenter='back'/>
-      <AuthFocus v-for="(value,index) in fansInfo" :key="index" :news='value.nickname' :newsTime='value.create_date' :img='value.head_img' @addfollows='delFans'/>
+      <AuthFocus v-for="(value) in fansInfo" :key="value.id" :news='value.nickname' :newsTime='value.create_date' :img='value.head_img' @addfollows='delFans(value.id)'/>
      
 
   </div>
@@ -24,44 +24,47 @@ export default {
         back(){
             this.$router.push({name:'Index'})
         },
-        delFans(){
-            const id =localStorage.getItem('userId')
+        delFans(id){
+          
             this.$axios({
                 url:'/user_unfollow/'+id,
                 params:{
                     id:id
                 },
-                 headers: {
+    //              headers: {
 
-        Authorization: "Bearer " + localStorage.getItem('token')
-          //Bearer是标准化
-    }
+    //     Authorization: "Bearer " + localStorage.getItem('token')
+    //       //Bearer是标准化
+    // }
             })
             .then(res=>{
                 this.$toast.success(res.data.message)
+                this.loadUpad()
             })
             .catch(err=>{
                 console.log(err);
             })
-        }
-    },
-    created(){
-        this.$axios({
+        },
+        loadUpad(){
+            this.$axios({
             url:'/user_follows',
-            headers: {
+    //     //     headers: {
 
-        Authorization: "Bearer " + localStorage.getItem('token')
-          //Bearer是标准化
-    }
+    //     // Authorization: "Bearer " + localStorage.getItem('token')
+    //     //   //Bearer是标准化
+    // }
         })
         .then(res=>{
               this.fansInfo=res.data.data
-              
              
         })
         .catch(res=>{
               console.log(err);
         })
+        }
+    },
+    created(){
+        this.loadUpad()
     }
 }
 </script>
