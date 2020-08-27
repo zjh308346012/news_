@@ -129,11 +129,11 @@ export default {
 
         method: "post",
 
-        data: newData,
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-          //Bearer是标准化
-        },
+        data: newData
+        // headers: {
+        //   Authorization: "Bearer " + localStorage.getItem("token"),
+        //   //Bearer是标准化
+        // },
       })
         .then((res) => {
           this.loadPage();
@@ -156,12 +156,12 @@ export default {
 
         params: {
           id: id,
-        },
+        }
 
-        headers: {
-          Authorization: "Bearer " + token,
-          //Bearer是标准化
-        },
+        // headers: {
+        //   Authorization: "Bearer " + token,
+        //   //Bearer是标准化
+        // },
       })
         .then((res) => {
           this.list = res.data.data;
@@ -184,11 +184,11 @@ export default {
 
         method:'post',
 
-         headers: {
+    //      headers: {
 
-        Authorization: "Bearer " + localStorage.getItem('token')
-          //Bearer是标准化
-    },
+    //     Authorization: "Bearer " + localStorage.getItem('token')
+    //       //Bearer是标准化
+    // },
         data:formData
       })
       .then(res=>{
