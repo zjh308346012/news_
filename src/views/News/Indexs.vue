@@ -5,47 +5,70 @@
       <div class="logo">
         <i class="iconfont iconnew"></i>
       </div>
-      <van-search
-        v-model="value" 
-        shape='round'
-        placeholder="搜索新闻"
-      />
+      <van-search v-model="value" shape="round" placeholder="搜索新闻" />
       <span class="login">
         <i class="iconfont iconwode" @click="goIndex"></i>
       </span>
     </div>
-   <van-tabs v-model="active">
-  <van-tab v-for="(value,index) in category" :key="index" :title="value.name">{{value.name}}</van-tab>
-  </van-tabs>
+    <van-tabs v-model="active" @click="getPage">
+      <van-tab v-for="value in category" :key="value.id" :title="value.name" ></van-tab>
+    </van-tabs>
+    <AuthArticle :categoryList='categoryList' :active='active'/>
   </div>
 </template>
 
 <script>
+import AuthArticle from '@/components/AuthArticle'
 export default {
+  components:{
+    AuthArticle
+  },
   data() {
     return {
-      value:'',
-      category:'',
-      active:0
-    }
+      value: "",
+      category: [],
+      active: 0,
+      categoryList:''
+    
+    };
   },
-  created(){
+  created() {
     this.$axios({
-      url:'/category'
+      url: "/category",
     })
-    .then(res=>{
-      console.log(res);
-      this.category=res.data.data
-    })
-    .catch(res=>{
-      console.log(err);
-    })
+      .then((res) => {
+        console.log(res);
+        this.category = res.data.data;
+        console.log(this.category);
+       
+      
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
-  methods:{
-    goIndex(){
-      this.$router.push({name:'Index'})
+  methods: {
+    goIndex() {
+      this.$router.push({ name: "Index" });
+    },
+    getPage(){
+    const categoryId = this.category[this.active].id
+      console.log(this.category[this.active].id);
+      this.$axios({
+        url:'/post',
+        
+        params:{
+             category:categoryId
+        }
+      })
+      .then(res=>{
+        console.log(res);
+          this.categoryList=res.data.data
+          console.log(this.categoryList);
+
+      })
     }
-  }
+  },
 };
 </script>
 
@@ -72,8 +95,8 @@ export default {
       color: #fff;
     }
   }
-  /deep/.van-search{
-    height: 50/360*100vw;
+  /deep/.van-search {
+    height: 50/360 * 100vw;
     background-color: red;
   }
   .login {
