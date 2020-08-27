@@ -15,12 +15,12 @@ export default {
     addFollow(id) {
       this.$axios({
         url: "/user_follows/" + id,
-        method: "get",
-         headers: {
+        method: "get"
+    //      headers: {
 
-        Authorization: "Bearer " + localStorage.getItem('token')
-          //Bearer是标准化
-    }
+    //     Authorization: "Bearer " + localStorage.getItem('token')
+    //       //Bearer是标准化
+    // }
       }).then(res => {
         console.log(res.data);
       });
