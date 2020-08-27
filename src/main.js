@@ -19,7 +19,7 @@ Vue.use(Vant)
 //路由守卫 to是要去那个页面,from是从那个页面而来 next是一个放行函数
 router.beforeEach((to, from, next) => {
   
-  const pageEdit=['Index','Edit','Focus','Follow','Collect','Addfans']
+  const pageEdit=['Index','Edit','Focus','Follow','Collect','Addfans','Column']
   const hasToken = localStorage.getItem('token');
     //在这里是否跳转到个人中心页面
     if(pageEdit.indexOf(to.name) != -1){
@@ -44,7 +44,7 @@ router.beforeEach((to, from, next) => {
 axios.defaults.baseURL='http://127.0.0.1:3000';
 //封装axios的基准路径
 
-
+// 数据响应的拦截器
 axios.interceptors.response.use(res=>{
    //这里是服务器数据响应时候的拦截器,因为终端只能判断有没有token 而不能判断token正不正确
   const reg = /^4\d{2}$/
@@ -69,6 +69,16 @@ axios.interceptors.response.use(res=>{
 }
 
 return res;
+})
+
+//请求数据拦截器
+
+axios.interceptors.request.use(config=>{
+
+  if(localStorage.getItem('token') && !config.headers.Authorization){
+    config.headers.Authorization = "Bearer " + localStorage.getItem('token')
+  }
+  return config
 })
 
 
