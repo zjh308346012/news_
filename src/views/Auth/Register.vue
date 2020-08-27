@@ -80,6 +80,7 @@ export default {
                  this.$toast.fail(res.data.message)
              }
              console.log(res);
+             this.$router.push({name:'Index'})
          })
          .catch(err=>{
              console.log(err);
