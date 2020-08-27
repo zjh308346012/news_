@@ -31,6 +31,11 @@ import Indexs from '@/views/News/Indexs'
 //新闻主页
 
 import Addfans from '@/views/Personal/Addfans'
+//关注页
+
+import Column from '@/views/News/Column'
+
+//栏目管理页
 
 Vue.use(VueRouter)
 
@@ -84,6 +89,11 @@ Vue.use(VueRouter)
      path:'/addfans',
      name:'Addfans',
      component:Addfans
+   },
+   {
+     path:'/column',
+     name:'Column',
+     component:Column
    }
 ]
 
